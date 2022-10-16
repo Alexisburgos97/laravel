@@ -18,4 +18,24 @@ Class Customers
 
         return $data;
     }
+
+    public function getCustomersFromDevice($tech)
+    {
+
+        $data = array();
+        $ids = array();
+
+        foreach ($tech->devices as $device){
+
+            if( !in_array($device->customer->id, $ids) ){
+                $data[] = $device->customer()->first();
+                $ids[] = $device->customer->id;
+            }
+
+        }
+
+        return $data;
+
+    }
+
 }

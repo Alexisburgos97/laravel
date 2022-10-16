@@ -21,4 +21,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/dispositivos', 'DeviceController');
+Route::resource('/devices', 'DeviceController');
+
+Route::resource('/customers', 'CustomerController');
+
+Route::get('/maintenances', 'MaintenancesController@index')->name('maintenances.index');
+Route::get('/maintenances/create', 'MaintenancesController@create')->name('maintenances.create');
+Route::post('/maintenances/store', 'MaintenancesController@store')->name('maintenances.store');
+Route::get('/maintenances/edit/{id}', 'MaintenancesController@edit')->name('maintenances.edit');
+Route::put('/maintenances/update/{id}', 'MaintenancesController@update')->name('maintenances.update');;
+Route::delete('/maintenances/delete/{id}', 'MaintenancesController@destroy')->name('maintenances.destroy');;
+
+Route::resource('technicians', 'TechnicianController');
+
+
+
+

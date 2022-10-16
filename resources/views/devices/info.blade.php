@@ -24,15 +24,15 @@
                             </tr>
                             <tr>
                                 <th>Estado</th>
-                                <td>{{$device->status}}</td>
+                                <td><span class="badge badge-pill badge-{{config('status.'.$device->status)}}">{{$device->status}}</td>
                             </tr>
                             <tr>
                                 <th>Fecha de entrada</th>
-                                <td>{{ $device->entry_date->format('d/m/Y') }}</td>
+                                <td>{{ $device->entry_date }}</td>
                             </tr>
                             <tr>
                                 <th>Fecha de salida</th>
-                                <td>{{ !empty($device->departure_date) ? $device->departure_date->format('d/m/Y') : '-' }}</td>
+                                <td>{{ !empty($device->departure_date) ? $device->departure_date : '-' }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -93,6 +93,6 @@
         </div>
     </div>
 
-    <a href="{{ route('dispositivos.index') }}" class="btn btn-secondary" ><i class="fas fa-undo"></i> Regresar</a>
+    <a href="{{ route('devices.index') }}" class="btn btn-secondary" ><i class="fas fa-undo"></i> Regresar</a>
 
 @endcomponent

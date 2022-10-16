@@ -10,9 +10,9 @@
     @endslot
 
     @if( !empty($device) )
-        {!! Form::model($device, ['route' => ['dispositivos.update', $device->id], 'method' => 'put']) !!}
+        {!! Form::model($device, ['route' => ['devices.update', $device->id], 'method' => 'put']) !!}
     @else
-        {!! Form::open(['route' => 'dispositivos.store', 'method' => 'post']) !!}
+        {!! Form::open(['route' => 'devices.store', 'method' => 'post']) !!}
     @endif
 
             <div class="form-group">
@@ -86,7 +86,7 @@
 
             <div class="form-group">
                 {{ Form::submit( !empty($device) ? 'Actualizar' : 'Crear ' , ['class' => 'btn btn-primary']) }}
-                <a href="{{route('dispositivos.index')}}" class="btn btn-secondary"><i class="fas fa-reply"></i> Ir al listado</a>
+                <a href="{{route('devices.index')}}" class="btn btn-secondary"><i class="fas fa-reply"></i> Ir al listado</a>
             </div>
 
         {!! Form::close() !!}

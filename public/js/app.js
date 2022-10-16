@@ -2564,27 +2564,30 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#app',
   data: {
     elementId: '',
+    elementoUrl: '',
     showSpinner: false
   },
   methods: {
-    getRoute: function getRoute(event) {
+    getElementData: function getElementData(event) {
       this.elementId = event.currentTarget.getAttribute('data-id');
+      this.elementoUrl = event.currentTarget.getAttribute('href');
     },
     deleteIt: function deleteIt() {
       var _this = this;
 
       if (this.elementId != '') {
-        this.showSpinner = true;
-        axios["delete"]('dispositivos/' + this.elementId).then(function (response) {
+        this.showSpinner = true; //+ '/' + this.elementId
+
+        axios["delete"](this.elementoUrl).then(function (response) {
           _this.showSpinner = false;
-          $('#deleteDispositivo').modal('hide');
+          $('#deleteRegister').modal('hide');
 
           if (response.data.status) {
             Toast.fire({
               icon: 'success',
               title: response.data.message
             });
-            $('#device' + _this.elementId).fadeOut();
+            $('#target' + _this.elementId).fadeOut();
           } else {
             Toast.fire({
               icon: 'error',
@@ -2593,7 +2596,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
           }
         }, function (error) {
           _this.showSpinner = false;
-          $('#deleteDispositivo').modal('hide');
+          $('#deleteRegister').modal('hide');
           Toast.fire({
             icon: 'warning',
             title: 'Error inesperado, intente de nuevo más tarde'

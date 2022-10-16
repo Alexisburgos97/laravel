@@ -15,9 +15,9 @@ class DeviceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $devices = Device::all();
+        $devices = Device::devicesFilter($request->status, $request->entry_date_from, $request->entry_date_to);
         return view('devices.index')->with('devices', $devices);
     }
 
@@ -53,7 +53,7 @@ class DeviceController extends Controller
 
         $request->session()->flash('message','Dispositivo almacenado correctamente');
 
-        return redirect()->route('dispositivos.index');
+        return redirect()->route('devices.index');
 
     }
 
@@ -68,7 +68,7 @@ class DeviceController extends Controller
         $device = Device::find($id);
 
         if( is_null($device) ){
-            return redirect()->route('dispositivos.index');
+            return redirect()->route('devices.index');
         }
 
         return view('devices.info')->with('device', $device);
@@ -86,7 +86,7 @@ class DeviceController extends Controller
         $device = Device::find($id);
 
         if( is_null($device) ){
-            return redirect()->route('dispositivos.index');
+            return redirect()->route('devices.index');
         }
 
         return view('devices.create_or_edit')->with('device', $device);
@@ -105,7 +105,7 @@ class DeviceController extends Controller
         $device = Device::find($id);
 
         if( is_null($device) ){
-            return redirect()->route('dispositivos.index');
+            return redirect()->route('devices.index');
         }
 
         $device->fill($request->all());
@@ -120,7 +120,7 @@ class DeviceController extends Controller
 
         $request->session()->flash('message','Dispositivo actualizado correctamente');
 
-        return redirect()->route('dispositivos.index');
+        return redirect()->route('devices.index');
 
     }
 
@@ -154,5 +154,12 @@ class DeviceController extends Controller
 
         }
 
+        return response()->json([
+            'status' => FALSE,
+            'message' => 'Error inesperado, intente de nuevo más tarde',
+        ], 500);
+
     }
+
+
 }

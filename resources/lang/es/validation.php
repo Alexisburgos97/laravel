@@ -152,6 +152,14 @@ return [
         'maintenances' => 'mantenimiento',
         'description' => 'descripción',
         'status' => 'estado',
+        'name' => 'nombre',
+        'last_name' => 'apellido',
+        'password' => 'contraseña',
+        'password_confirmation' => 'confirmar contraseña',
+        'id_number' => 'número de identificación',
+        'address' => 'dirección',
+        'phone' => 'teléfono',
+        'price' => 'precio',
     ],
 
 ];

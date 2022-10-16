@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name','email', 'avatar', 'password',
+        'name', 'last_name','email', 'type', 'password'
     ];
 
     /**
@@ -37,6 +37,21 @@ class User extends Authenticatable
     ];
 
     public function devices(){
-        $this->hasMany('App\Models\Device');
+        return $this->hasMany('App\Models\Device');
     }
+
+    public static function technicianFilter($data)
+    {
+        return User::techData($data)->paginate(10);
+    }
+
+    public function scopeTechData($query, $data)
+    {
+        if( !empty($data) ){
+            return $query->where('name', 'LIKE', "%$data%")
+                ->orWhere('last_name', 'LIKE', "%$data%")
+                ->orWhere('email', 'LIKE', "%$data%");
+        }
+    }
+
 }
