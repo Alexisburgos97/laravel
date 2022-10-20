@@ -78,9 +78,9 @@
                         <tbody>
                             @foreach($customer->devices as $device)
                                 <tr>
-                                    <td>{{$device->user->name}}</td>
-                                    <td>{{$device->user->last_name}}</td>
-                                    <td>{{$device->user->email}}</td>
+                                    <td>{{ (!empty($device->user->name) ? $device->user->name : '') }}</td>
+                                    <td>{{ (!empty($device->user->last_name) ? $device->user->last_name : '') }}</td>
+                                    <td>{{ (!empty($device->user->email) ? $device->user->email : '') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

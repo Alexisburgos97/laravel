@@ -2,8 +2,10 @@
 
     @slot('title')
         Tipos de mantenimientos
-        <a href="{{route('maintenances.create')}}" class="btn btn-secondary float-right"><i class="fas fa-plus"></i>
-            Crear</a>
+        @can('check-admin')
+            <a href="{{route('maintenances.create')}}" class="btn btn-secondary float-right"><i class="fas fa-plus"></i>
+                Crear</a>
+        @endcan
     @endslot
 
     @include('maintenances.filter_form')
@@ -14,7 +16,9 @@
             <tr>
                 <th class="text-center">Tipo</th>
                 <th class="text-center">Precio</th>
-                <th class="text-center">Acciones</th>
+                @can('check-admin')
+                    <th class="text-center">Acciones</th>
+                @endcan
             </tr>
             </thead>
             <tbody>
@@ -22,10 +26,12 @@
                 <tr id="target{{$maintenance->id}}">
                     <th class="text-center">{{$maintenance->name}}</th>
                     <td class="text-center">{{$maintenance->price}}</td>
-                    <td class="text-center">
-                        <a href="{{ route('maintenances.edit', [$maintenance->id]) }}" class="btn btn-outline-dark"><i class="fas fa-edit"></i> Editar</a>
-                        <a href="{{ route('maintenances.destroy', [$maintenance->id]) }}" @click="getElementData" data-id={{$maintenance->id}} class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteRegister"><i class="fas fa-trash"></i> Eliminar</a>
-                    </td>
+                    @can('check-admin')
+                        <td class="text-center">
+                            <a href="{{ route('maintenances.edit', [$maintenance->id]) }}" class="btn btn-outline-dark"><i class="fas fa-edit"></i> Editar</a>
+                            <a href="{{ route('maintenances.destroy', [$maintenance->id]) }}" @click="getElementData" data-id={{$maintenance->id}} class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteRegister"><i class="fas fa-trash"></i> Eliminar</a>
+                        </td>
+                    @endcan
                 </tr>
             @empty
                 <h3>No existen mantenimientos</h3>

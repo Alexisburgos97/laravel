@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use App\Http\Requests\Customer\CreateRequest;
 use App\Http\Requests\Customer\UpdateRequest;
 
 class CustomerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -113,6 +120,9 @@ class CustomerController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+
+        //if(Gate::allows('check-admin')){}
+
         if( $request->ajax() ){
 
             $customer = Customer::find($id);
@@ -124,7 +134,7 @@ class CustomerController extends Controller
                 ], 404);
             }
 
-            //$customer->delete();
+            $customer->delete();
 
             return response()->json([
                 'status' => TRUE,

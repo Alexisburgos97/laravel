@@ -1,14 +1,24 @@
 <?php
 
-namespace App\Http\Requests\Techinician;
+namespace App\Http\Requests\Profile;
 
-use App\Rules\imageSize;
 use App\Rules\ImageError;
 use App\Rules\imageExtension;
+use App\Rules\imageSize;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Routing\Route;
+use Illuminate\Validation\Rule;
 
-class CreateRequest extends FormRequest
+class updatePersonalData extends FormRequest
 {
+
+    protected $route;
+
+    public function __construct(Route $route)
+    {
+        $this->route = $route;
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,9 +39,8 @@ class CreateRequest extends FormRequest
         return [
             'name' => 'required|max:100',
             'last_name' => 'required|max:100',
-            'email' => 'required|email:filter|unique:users',
+            'email' => ['required', 'email:filter', Rule::unique('users')->ignore(auth()->user()->id)],
             'avatar' => ['file', new imageError, new imageExtension, new imageSize],
-            'password' => 'required|string|min:8|confirmed',
         ];
     }
 }

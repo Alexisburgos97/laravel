@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Device;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use App\Http\Requests\Device\CreateRequest;
 use App\Http\Requests\Device\UpdateRequest;
 
 class DeviceController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +48,7 @@ class DeviceController extends Controller
     {
         $data = [
             'customer_id' => $request->customer_id,
-            'user_id' => $request->user_id,
+            'user_id' => (auth()->user()->isAdmin()) ? $request->user_id : auth()->user()->id,
             'description' => $request->description,
             'status' => 'Recibido',
             'entry_date' => Carbon::now(),
@@ -78,8 +85,9 @@ class DeviceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws AuthorizationException
      */
     public function edit($id)
     {
@@ -87,6 +95,10 @@ class DeviceController extends Controller
 
         if( is_null($device) ){
             return redirect()->route('devices.index');
+        }
+
+        if( !auth()->user()->isAdmin() ){
+            $this->authorize('update', $device);
         }
 
         return view('devices.create_or_edit')->with('device', $device);
@@ -106,6 +118,10 @@ class DeviceController extends Controller
 
         if( is_null($device) ){
             return redirect()->route('devices.index');
+        }
+
+        if( !auth()->user()->isAdmin() ){
+            $this->authorize('update', $device);
         }
 
         $device->fill($request->all());
@@ -145,7 +161,7 @@ class DeviceController extends Controller
                 ], 404);
             }
 
-            //$device->delete();
+            $device->delete();
 
             return response()->json([
                     'status' => TRUE,

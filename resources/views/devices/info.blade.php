@@ -58,14 +58,18 @@
                 <div class="tab-pane fade" id="v-pills-technician" role="tabpanel" aria-labelledby="v-pills-technician-tab">
                     <table class="table table-bordered table-hover">
                         <tbody>
-                            <tr>
-                                <th>Nombre del técnico</th>
-                                <td>{{$device->user->name}}</td>
-                            </tr>
-                            <tr>
-                                <th>Apellido del técnico</th>
-                                <td>{{$device->user->last_name}}</td>
-                            </tr>
+                            @if( !empty($device->user) )
+                                <tr>
+                                    <th>Nombre del técnico</th>
+                                    <td>{{$device->user->name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Apellido del técnico</th>
+                                    <td>{{$device->user->last_name}}</td>
+                                </tr>
+                            @else
+                                <h5>No existe un técnico disponible</h5>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -79,13 +83,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($device->maintenances as $maintenance)
-                                <tr>
-                                    <th >{{$maintenance->id}}</th>
-                                    <th >{{$maintenance->name}}</th>
-                                    <th >{{$maintenance->price}}</th>
-                                </tr>
-                            @endforeach
+                            @if( !empty($device->maintenances) )
+                                @foreach($device->maintenances as $maintenance)
+                                    <tr>
+                                        <th >{{$maintenance->id}}</th>
+                                        <th >{{$maintenance->name}}</th>
+                                        <th >{{$maintenance->price}}</th>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <h5>No existe un mantenimiento disponible</h5>
+                            @endif
                         </tbody>
                     </table>
                 </div>

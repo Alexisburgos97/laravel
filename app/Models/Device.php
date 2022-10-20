@@ -40,6 +40,14 @@ class Device extends Model
     }
 
     public static function devicesFilter($status, $entry_date_from, $entry_date_to){
+
+        if( !auth()->user()->isAdmin() ){
+            return Device::status($status)
+                ->entryDate($entry_date_from, $entry_date_to)
+                ->where('user_id', auth()->user()->id)
+                ->paginate(10);
+        }
+
         return Device::status($status)->entryDate($entry_date_from, $entry_date_to)->paginate(10);
     }
 

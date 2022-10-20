@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 class MaintenancesController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('admin')->except('index');
+    }
+
     public function index(Request $request){
         //$maintenances = Maintenance::paginate(10);
         $maintenances = Maintenance::maintenancesFilter($request->maintenance_name);

@@ -35,8 +35,29 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('devices.index') }}">{{ __('Devices') }}</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('customers.index') }}">{{ __('Customers') }}</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('maintenances.index') }}">{{ __('Maintenances') }}</a>
+                            </li>
+
+                            @can('check-admin')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('technicians.index') }}">{{ __('Technicians') }}</a>
+                                </li>
+                            @endcan
+                        @endauth
 
                     </ul>
 
@@ -59,6 +80,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('profile.index') }}">{{ __('Profile') }}</a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -68,10 +92,12 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+
                                 </div>
                             </li>
                         @endguest
                     </ul>
+
                 </div>
             </div>
         </nav>

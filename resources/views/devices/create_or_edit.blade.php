@@ -29,16 +29,20 @@
             </div>
 
             <div class="form-group">
-                {{ Form::label('user_id', 'Técnico', ['class' => 'control-label']) }}
-                {!!Form::select('user_id', $technicians->get(), null, [
-                    'placeholder' => 'Seleccione un técnico',
-                    'class' => 'form-control '.( !empty($errors->first('user_id')) ? ' is-invalid ' : '' )]) !!}
+                @if( auth()->user()->isAdmin() )
 
-                @error('user_id')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                    {{ Form::label('user_id', 'Técnico', ['class' => 'control-label']) }}
+                    {!!Form::select('user_id', $technicians->get(), null, [
+                        'placeholder' => 'Seleccione un técnico',
+                        'class' => 'form-control '.( !empty($errors->first('user_id')) ? ' is-invalid ' : '' )]) !!}
+
+                    @error('user_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                @endif
             </div>
 
             <div class="form-group">

@@ -49,17 +49,22 @@
                         <tbody>
                             @foreach($technician->devices as $device)
                                 <tr>
+                                    <th>Descripción</th>
                                     <td>{{$device->description}}</td>
                                 </tr>
                                 <tr>
+                                    <th>Estado</th>
                                     <td><span class="badge badge-pill badge-{{config('status.'.$device->status)}}">{{$device->status}}</td>
                                 </tr>
                                 <tr>
-                                    <ul>
-                                        @foreach($device->maintenances as $maintenance)
-                                            <li>{{$maintenance->name}}</li>
-                                        @endforeach
-                                    </ul>
+                                    <th>Mantenimiento</th>
+                                    <td>
+                                        <ul>
+                                            @foreach($device->maintenances as $maintenance)
+                                               <li>{{$maintenance->name}}</li>
+                                           @endforeach
+                                        </ul>
+                                    </td>
                                 </tr>
                                @endforeach
                         </tbody>
@@ -80,6 +85,10 @@
                                 <tr>
                                     <th>Email</th>
                                     <td>{{$customer->email}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Ver más</th>
+                                    <td><a href="{{ route('customers.show', $customer->id  ) }}">Ver cliente</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

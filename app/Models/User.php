@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -52,6 +54,16 @@ class User extends Authenticatable
                 ->orWhere('last_name', 'LIKE', "%$data%")
                 ->orWhere('email', 'LIKE', "%$data%");
         }
+    }
+
+//    public function setPasswordAttribute($value)
+//    {
+//        $this->attributes['password'] = Hash::make($value);
+//    }
+
+    public function isAdmin()
+    {
+        return $this->type == 1;
     }
 
 }

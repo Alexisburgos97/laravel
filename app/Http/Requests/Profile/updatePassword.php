@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Techinician;
+namespace App\Http\Requests\Profile;
 
-use App\Rules\imageSize;
 use App\Rules\ImageError;
 use App\Rules\imageExtension;
+use App\Rules\imageSize;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class CreateRequest extends FormRequest
+class updatePassword extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,10 +28,7 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:100',
-            'last_name' => 'required|max:100',
-            'email' => 'required|email:filter|unique:users',
-            'avatar' => ['file', new imageError, new imageExtension, new imageSize],
+            'current_password' => 'password',
             'password' => 'required|string|min:8|confirmed',
         ];
     }
