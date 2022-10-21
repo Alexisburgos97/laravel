@@ -7,10 +7,10 @@
     <div class="row">
         <div class="col-3">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <button class="nav-link active" id="v-pills-device-tab" data-toggle="pill" data-target="#v-pills-device" type="button" role="tab" aria-controls="v-pills-device" aria-selected="true">Device</button>
-                <button class="nav-link" id="v-pills-customer-tab" data-toggle="pill" data-target="#v-pills-customer" type="button" role="tab" aria-controls="v-pills-customer" aria-selected="false">Customer</button>
-                <button class="nav-link" id="v-pills-technician-tab" data-toggle="pill" data-target="#v-pills-technician" type="button" role="tab" aria-controls="v-pills-technician" aria-selected="false">Technician</button>
-                <button class="nav-link" id="v-pills-maintenance-tab" data-toggle="pill" data-target="#v-pills-maintenance" type="button" role="tab" aria-controls="v-pills-maintenance" aria-selected="false">Services</button>
+                <button class="nav-link active" id="v-pills-device-tab" data-toggle="pill" data-target="#v-pills-device" type="button" role="tab" aria-controls="v-pills-device" aria-selected="true">Dispositivos</button>
+                <button class="nav-link" id="v-pills-customer-tab" data-toggle="pill" data-target="#v-pills-customer" type="button" role="tab" aria-controls="v-pills-customer" aria-selected="false">Clientes</button>
+                <button class="nav-link" id="v-pills-technician-tab" data-toggle="pill" data-target="#v-pills-technician" type="button" role="tab" aria-controls="v-pills-technician" aria-selected="false">Técnicos</button>
+                <button class="nav-link" id="v-pills-maintenance-tab" data-toggle="pill" data-target="#v-pills-maintenance" type="button" role="tab" aria-controls="v-pills-maintenance" aria-selected="false">Sevicios</button>
             </div>
         </div>
         <div class="col-9">
