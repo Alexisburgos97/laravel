@@ -1,18 +1,22 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeders.
      *
      * @return void
      */
     public function run()
     {
-        factory('App\Models\User')->create([
+        User::factory()->create([
             'name' => 'Admin',
             'last_name' => 'Admin',
             'type' => 1,
@@ -22,7 +26,7 @@ class UsersTableSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        factory('App\Models\User', 10)->create();
+        User::factory(10)->create();
 
     }
 }
